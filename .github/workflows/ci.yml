@@ -28,7 +28,7 @@ jobs:
       - name: Check that pages load only local scripts and styles
         shell: bash
         run: |
-          if grep -n -E '<script[^>]+src="https?:|<link[^>]+href="https?:' index.html; then
+          if grep -n -E '<script[^>]+src="https?:|<link[^>]+rel="stylesheet"[^>]+href="https?:|<link[^>]+href="https?:[^>]+rel="stylesheet"' index.html; then
             echo "External scripts or stylesheets found; keep the app self-contained."
             exit 1
           fi
