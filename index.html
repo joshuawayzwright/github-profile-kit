@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>GitHub Profile Kit</title>
+<meta name="description" content="Fill in a form and get a clean GitHub profile README with social badges, an about section, projects and skills. Free and runs in your browser.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the form</a>
+<header class="site"><div class="wrap">
+  <h1>GitHub <span>Profile</span> Kit</h1>
+  <p>Fill in the form, copy the Markdown, and your GitHub profile is done. Everything stays in your browser.</p>
+</div></header>
+
+<main id="main" class="wrap">
+  <div class="grid">
+    <form class="card" id="form" novalidate>
+      <h2>You</h2>
+      <div class="row two">
+        <div><label for="name">Name</label><input id="name" autocomplete="name"></div>
+        <div><label for="location">Location</label><input id="location" placeholder="e.g. Gold Coast, Australia"></div>
+      </div>
+      <label for="tagline">Tagline</label>
+      <input id="tagline" placeholder="e.g. Founder · Full-stack developer · AI tools">
+
+      <h2 class="spaced">Links <span class="hint">Type a handle (@you) or paste the full link</span></h2>
+      <div class="row two" id="socials"></div>
+      <div class="row two">
+        <div><label for="website">Website</label><input id="website" type="url" placeholder="https://"></div>
+        <div><label for="email">Email</label><input id="email" type="email"></div>
+      </div>
+      <div class="row two">
+        <div><label for="accent">Badge colour</label><input id="accent" type="color" value="#0087ff"></div>
+        <div><label for="labelColor">Badge label colour</label><input id="labelColor" type="color" value="#0a0a0a"></div>
+      </div>
+
+      <h2 class="spaced">About you</h2>
+      <label for="intro">Intro <span class="hint">One or two sentences</span></label>
+      <textarea id="intro"></textarea>
+      <label for="about">What you're doing now <span class="hint">One per line. Emojis welcome.</span></label>
+      <textarea id="about" placeholder="🛠️ Building a shop for sole traders&#10;🎓 Studying Computer Science"></textarea>
+
+      <h2 class="spaced">Projects and skills</h2>
+      <label for="projects">Projects <span class="hint">One per line: Name | https://link | short description</span></label>
+      <textarea id="projects" placeholder="My App | https://github.com/you/my-app | What it does"></textarea>
+      <label for="skills">Skills <span class="hint">Separated by commas</span></label>
+      <input id="skills" placeholder="JavaScript, Python, SQL">
+      <label for="statsFor">GitHub stats card <span class="hint">Optional: your GitHub username. Uses the third-party github-readme-stats service.</span></label>
+      <input id="statsFor" autocomplete="off">
+    </form>
+
+    <section class="card" aria-labelledby="out-title">
+      <h2 id="out-title">Your README.md</h2>
+      <p class="error" id="errors" role="alert"></p>
+      <pre class="output" id="output"></pre>
+      <div class="buttons">
+        <button class="primary" type="button" id="copy">Copy Markdown</button>
+        <button type="button" id="download">Download README.md</button>
+      </div>
+      <p class="status" id="status" role="status"></p>
+      <h3>How to use it</h3>
+      <ol class="hint">
+        <li>On GitHub, create a public repository with exactly the same name as your username.</li>
+        <li>Add a file called <code>README.md</code> and paste this in.</li>
+        <li>Commit it. It now shows at the top of your profile.</li>
+      </ol>
+    </section>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">
+  Made by <a href="https://github.com/joshuawayzwright">Joshua Wright</a> · <a href="https://github.com/joshuawayzwright/github-profile-kit">Source</a>
+</div></footer>
+<script src="lib.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

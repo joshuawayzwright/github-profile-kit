@@ -1,0 +1,41 @@
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Run unit tests
+        run: node --test "tests/*.test.js"
+
+      - name: Check that pages load only local scripts and styles
+        shell: bash
+        run: |
+          if grep -n -E '<script[^>]+src="https?:|<link[^>]+href="https?:' index.html; then
+            echo "External scripts or stylesheets found; keep the app self-contained."
+            exit 1
+          fi
+
+      - name: Check for unresolved merge markers
+        shell: bash
+        run: |
+          if grep -R -n -E '^(<<<<<<<|=======|>>>>>>>)' --exclude-dir=.git .; then
+            exit 1
+          fi
